@@ -1,0 +1,157 @@
+<!-- Cassie Williams    |   Final Project - WEB 124    |   October 20,2020 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Cassie Williams">
+    <link rel="stylesheet" href="css/final.css">
+    <title>Final Project | JCCC | WEB 124</title>
+</head>
+<div id="wrapper">
+<body>
+    <header>
+        <blockquote><q>The limits of my language mean the limits of my world.</q>
+            <br>– Ludwig Wittgenstein
+        </blockquote>
+    </header>
+    <main>
+        <h1>JavaScript II Final</h1>
+
+        <!-- Section 1 -->
+            <h2>1 | Manipulate the DOM</h2>
+            <p id="modify_html">This function was created to show interactivity with the DOM. It will use JavaScript to modify an HTML element. An event listener on the button will run the function when the button is clicked and change the text color and font weight of this paragraph.</p>
+            <div class="code_examples">
+                <code>function modifyText() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let paragraph = document.getElementById('modify_html');<br>&nbsp;&nbsp;&nbsp;&nbsp;paragraph.setAttribute('style', 'color:#ff7676; font-weight:700');<br>}<br>const modifyBtn = document.getElementById('modify');<br>modifyBtn.addEventListener('click', modifyText, false);
+                </code>
+            </div>
+            <button id="modify">Modify DOM</button>
+
+        <!-- Section 2 -->
+            <h2>2 | Add and Remove HTML Nodes</h2>
+            <p>The next two functions will use <code class="inline">createElement()</code> and <code class="inline">removeChild()</code> methods to add a new paragraph node and remove the new node using event listeners on the respective buttons.</p>
+            <div class="code_examples">
+                <code>
+                    function addNode() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let add = document.createElement('p');<br>&nbsp;&nbsp;&nbsp;&nbsp;let newPara = document.createTextNode(`"It is, in fact, nothing short of a miracle that the modern methods of instruction have not yet entirely strangled the holy curiosity of inquiry." - Albert Einstein`);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;add.setAttribute('style', 'font-weight:700; font-size:1.4rem; border:1px solid gray; padding: 3rem');<br>&nbsp;&nbsp;&nbsp;&nbsp;add.appendChild(newPara);<br>&nbsp;&nbsp;&nbsp;&nbsp;let placement = document.getElementById('node');<br>&nbsp;&nbsp;&nbsp;&nbsp;placement.appendChild(add);<br>}<br>const addBtn = document.getElementById('add_node');<br>
+                    addBtn.addEventListener('click', addNode, false);<br>
+                </code>
+            </div>
+            <div class="code_examples">
+                <code>
+                    function removeNode() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let remove = document.getElementById('node').firstChild;<br>&nbsp;&nbsp;&nbsp;&nbsp;let container = remove.parentNode;<br>&nbsp;&nbsp;&nbsp;&nbsp;container.removeChild(remove);<br>
+                    }<br>const removeBtn = document.getElementById('remove_node');<br>
+                    removeBtn.addEventListener('click', removeNode, false);<br>
+                </code>
+            </div>
+            <!-- added empty p element for new element to fit below the code examples -->
+            <p id="node"></p>
+            <button id="add_node">Add Node</button><button id="remove_node">Remove Node</button>
+
+        <!-- Section 3 -->
+            <h2>3 | Control the BOM</h2>
+            <p>The following function will display a variety of information related to the Browser Object Model via a click event listener on the "Show Info" button.</p>
+            <div class="code_examples">
+                <code>
+                    function showBom() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let info = `&lt;h3>Window Location&lt;/h3>${window.location.href}&lt;br>`;<br>&nbsp;&nbsp;&nbsp;
+                    info += `&lt;h3>Browser Version&lt;/h3>${navigator.appVersion}&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;info += `&lt;h3>Window Size&lt;/h3>width: ${window.innerWidth}px&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;info += `height: ${window.innerHeight}px&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;info += `&lt;h4>Mouse Coordinates&lt;/h4>x coordinate: ${window.screenX}&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;info += `y coordinate: ${window.screenY}&lt;br>`;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;let windowInfo = document.getElementById('window_info');<br>&nbsp;&nbsp;&nbsp;&nbsp;windowInfo.innerHTML = info;<br>&nbsp;&nbsp;&nbsp;&nbsp;windowInfo.setAttribute('style''background-color:#ebebebcc;');<br>}<br>const bomBtn = document.getElementById('bom_btn');<br>bomBtn.addEventListener('click', showBom, false);
+                </code>
+            </div>
+            <button id="bom_btn">Show Info</button>
+            <div id="window_info"></div><br><br>
+
+        <!-- Section 4 -->
+        <h2>4 | Enhance and Validate Form Data</h2>
+        <p>The three functions below will run a blur event when the username input field loses focus, use a toggle event to show or hide the password, and use a button click event to show the form. Click the sign up button to view the form!</p>
+        <div class="code_examples">
+            <code>
+                function userName() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let message = document.getElementById('message');<br>&nbsp;&nbsp;&nbsp;&nbsp;let length = username.value;<br>&nbsp;&nbsp;&nbsp;&nbsp;if (length.length &lt; 8) { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message.textContent="* Username needs to be at least 8 characters *";<br>&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                message.textContent='';<br>&nbsp;&nbsp;&nbsp;&nbsp; } <br>&nbsp;&nbsp;}<br> const username=document.getElementById('username');<br>username.addEventListener('blur',
+                userName, false);
+            </code>
+        </div>
+        <div class="code_examples">
+            <code>
+                function togglePwd() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let pwd = document.getElementById('password');<br>&nbsp;&nbsp;&nbsp;&nbsp;if (pwd.type === "password") {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pwd.type = "text";<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                } else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pwd.type = "password";<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>const toggle = document.getElementById('show_hide_password');<br>toggle.addEventListener('click', togglePwd, false);
+            </code>
+        </div>
+        <div class="code_examples">
+            <code>
+                function showForm() {<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                let form = document.getElementsByTagName('form')[0];<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                form.setAttribute('style', 'display:block;');<br>
+                }<br>
+                document.getElementById('show_form').addEventListener('click', showForm, false);
+            </code>
+        </div>
+        <button id="show_form">Sign Up!</button>
+        <form>
+            <h1>Create an Account!</h1>
+            <p>Create Username:</p>
+            <input type="text" id="username" placeholder="Username">
+            <div id="message"></div>
+            <p>Create Password:</p>
+            <input type="password" id="password" placeholder="Password"><br>
+            Show password:<input type="checkbox" id="show_hide_password">
+        </form>
+
+        <!-- Section 5 -->
+            <h2>5 | Create Scripts Using Built-in JS Classes</h2>
+            <p>The following function will use the <code class="inline">new Date()</code> method to show a running clock of the current local time and the current date. This function was put inside another function called "run" so that the <code class="inline">setInterval()</code> method used to keep the clock running would only run when the button is clicked.</p>
+            <div class="code_examples">
+                <code>
+                    function run() {<br>&nbsp;&nbsp;&nbsp;&nbsp;function showDateInfo() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let today = new Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let showDate = document.getElementById('date');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showDate.setAttribute('style', 'background-color:#2e2e2e;');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showDate.innerHTML = `Today's Date: ${today.toLocaleDateString()}&lt;br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Time: ${today.toLocaleTimeString()}`;<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;setInterval(showDateInfo, 1);<br>}<br>const dateBtn = document.getElementById('date_btn');<br>dateBtn.addEventListener('click', run, false);
+                </code>
+            </div>
+            <p id="date"></p>
+            <button id="date_btn">Show Clock</button>
+
+        <!-- Section 6 -->
+            <h2>6 | Manipulate Data in Strings and Arrays</h2>
+            <p>The following functions will display the planets of our solar system as an array using a for loop. When this array is clicked, the array will update and the planet values will change to show information about the length of day of each planet. The second function is running within the first so that we can use a click event on the initial array to update it to the new version. Pluto has been brought back into the fold as the first born of our long lost dwarf planets.</p>
+            <div class="code_examples">
+                <code>
+                    let allPlanets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto'];<br>function planets() {<br>let showPlanets = '';<br>&nbsp;&nbsp;&nbsp;&nbsp;for (let i = 0; i &lt;= 8; i++) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showPlanets += `${allPlanets[i]}&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('show_planets').innerHTML = showPlanets;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;function updateArray() { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let showPlanets = document.getElementById('show_planets');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    allPlanets[0] = `&lt;strong>Mercury&lt;/strong>'s day is 58.6 Earth days.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[1] = `&lt;strong>Venus&lt;/strong>' day is 241 Earth days.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[2] = `&lt;strong>Earth day = 24 hours.&lt;/strong>&lt;br>`; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[3] = `&lt;strong>Mars&lt;/strong>' day is 24 hours and 37 minutes.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[4] = `&lt;strong>Jupiter&lt;/strong>'s day is 9.8 Earth hours.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[5] = `&lt;strong>Saturn&lt;/strong>'s day is 10.5 Earth hours.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[6] = `&lt;strong>Uranus&lt;/strong>' day is 18 Earth hours.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[7] = `&lt;strong>Neptune&lt;/strong>'s day is 19 Earth hours.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allPlanets[8] = `&lt;strong>Pluto&lt;/strong>'s day is 6.4 Earth days.&lt;br>`;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showPlanets.innerHTML = allPlanets.join("");<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;const clickElement = document.getElementById('show_planets');<br>&nbsp;&nbsp;&nbsp;&nbsp;clickElement.addEventListener('click', updateArray, false);<br>}<br>const planetButton = document.getElementById('planets_btn');<br>planetButton.addEventListener('click', planets, false);
+                </code>
+            </div>
+            <button id="planets_btn">Show Planets</button>
+            <p id="planet_text">The planets of our Solar System (+ Pluto)</p>
+            <p id="show_planets"></p>
+
+        <!-- Section 7 -->
+        <h2>7 | Validate JS and Apply Debugging Techniques</h2>
+        <p>The following function uses the built-in JavaScript error object with the try and catch statements to validate input errors. The last few lines of code in the function use an if statement to run a message letting the user know they have succeeded with their input.</p>
+        <div class="code_examples">
+            <code>
+                function handleErrors() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let errorMessage = document.getElementById('hint');<br>&nbsp;&nbsp;&nbsp;&nbsp;let userInput = document.getElementById('user_input').value;<br>&nbsp;&nbsp;&nbsp;&nbsp;try {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (userInput == '') throw 'full of emptiness';<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (userInput &lt; 100) throw 'less than one benjamin';<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (userInput > 150) throw 'more than two benjamins';<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (isNaN(userInput)) throw 'text';<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;catch(err) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage.textContent = `User input cannot be ${err}.`;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;if (userInput > 100 && userInput &lt; 150 && userInput !=='' && !isNaN(userInput)) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage.textContent="You've found the sweet spot!" ;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage.setAttribute('style', 'font-size:1.5rem; color:#ff7676;' ); <br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;
+                 } <br>const check = document.getElementById('check_code');<br>check.addEventListener('click', handleErrors, false);
+             </code>
+        </div>
+        <p id="input_text">Try me!</p>
+        <input id="user_input" type="text">
+        <p id="hint"></p>
+        <button id="check_code">Validate Code</button>
+
+        <!-- Section 8 -->
+        <h2>8 | Apply Techniques for Security Issues</h2>
+        <p>The following function uses a variable set to a string of special characters. To prevent bad actors from entering code into the text box a for loop and if/else statement is run to evaluate the user input. If the user information does not include any of the specified special characters, they are then allowed to submit the form. Press the Show Form button to view the demonstration!</p>
+        <div class="code_examples">
+            <code>
+                function validate() {<br>&nbsp;&nbsp;&nbsp;&nbsp;let comments = document.getElementById('comments');<br>&nbsp;&nbsp;&nbsp;&nbsp;let specialChars = '&lt;&gt;&#x2F;$&amp;{}][}&#x60;%';<br><br>&nbsp;&nbsp;&nbsp;&nbsp;for (let i = 0; i &lt; comments.value.length; i++) { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (specialChars.indexOf(comments.value.charAt(i)) !=-1) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('Evil characters detected, try again!');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comments.focus();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('Congrats, your dream vacation will be submitted!'); <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} break; <br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br>
+                const submit=document.getElementById('submit');<br>submit.addEventListener('click', validate, false);
+            </code>
+        </div>
+        <form>
+            <h1>Dream Vacation!</h1><br><br>
+            <textarea name="comments" id="comments" placeholder="Describe your dream vacation..." rows="10" cols="50"></textarea><br>
+        </form>
+        <button id="submit">Submit!</button><br>
+        <button id="show_form2">Show Form!</button>
+    </main>
+    <script src="js/final.js"></script>
+</body>
+</div>
+<footer>&copy; Cassie Williams 2020 | JCCC | WEB 124</footer>
+</html>
